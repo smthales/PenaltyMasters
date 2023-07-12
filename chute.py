@@ -61,7 +61,7 @@ def chute():
         if teclado.key_pressed("ESCAPE"):
             return 0
         
-        if user_mouse.is_over_object(esquerda) and user_mouse.is_button_pressed(1):
+        if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(esquerda):
             chutou = True
             if num == 1:
                 if goleiro.x > 388 - (gol.width / 2) + 20:
@@ -87,7 +87,7 @@ def chute():
                 
             
         
-        if user_mouse.is_over_object(centro) and user_mouse.is_button_pressed(1):
+        if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(centro):
             chutou = True
             if num == 1:
                 if goleiro.x > 388 - (gol.width / 2) + 20:
@@ -110,7 +110,7 @@ def chute():
             
             
         
-        if user_mouse.is_over_object(direita) and user_mouse.is_button_pressed(1):
+        if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(direita):
             chutou = True
             if num == 1:
                 if goleiro.x > 388 - (gol.width / 2) + 20:
