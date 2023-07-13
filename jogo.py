@@ -44,7 +44,9 @@ def iniciar_jogo():
         
         
         if teclado.key_pressed("SPACE"):
-            chute()
+            chute(False)
+            
+
 
             
 
@@ -64,3 +66,4 @@ def iniciar_jogo():
         torcida_principal.draw()
        
         janela.update()
+        
