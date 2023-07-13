@@ -9,6 +9,7 @@ from time import sleep
 
 
 
+
     
 
 
@@ -78,6 +79,8 @@ def chute():
         cursor.draw()
         bola.draw()
 
+        if teclado.key_pressed("ENTER"):
+            chute()
 
         if vez_azul == True:
             
@@ -90,38 +93,42 @@ def chute():
                 if num == 1:
                     if goleiro_vermelho.x > 388 - (gol.width / 2) + 20:
                         goleiro_vermelho.move_x(-0.70)
-                    if bola.x > 265:    
+                    if bola.x > 265 and bola.y > 150:    
                         bola.y -= 400 * janela.delta_time()
                         bola.x -= 250 * janela.delta_time()
                     defesa = True
                         
                 if num == 3:
-                    pontos_azul += 1
+                    
                     if goleiro_vermelho.x < 388 + (gol.width / 2) - 20:
                         goleiro_vermelho.move_x(0.70)
-                    if bola.x > 265:    
+                    if bola.x > 265 and bola.y > 150:    
                         bola.y -= 400 * janela.delta_time()
                         bola.x -= 250 * janela.delta_time()
+                    if bola.y <= 150:
+                        pontos_azul += 1
                     
                     
                 if num == 2:
-                    pontos_azul += 1
-                    if bola.x > 265:    
+                    
+                    if bola.x > 265 and bola.y > 150:    
                         bola.y -= 400 * janela.delta_time()
                         bola.x -= 250 * janela.delta_time()
+                    if bola.y <= 150:
+                        pontos_azul += 1
                     
                     
             if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(centro):
                 chutou = True
                 if num == 1:
-                    pontos_azul += 1
+                    
                     if goleiro_vermelho.x > 388 - (gol.width / 2) + 20:
                         goleiro_vermelho.move_x(-0.70)
                     bola.y -= 400 * janela.delta_time()
                     
                     
                 if num == 3:
-                    pontos_azul += 1
+                    
                     if goleiro_vermelho.x < 388 + (gol.width / 2) - 20:
                         goleiro_vermelho.move_x(0.70)
                     bola.y -= 400 * janela.delta_time()
@@ -134,12 +141,12 @@ def chute():
             if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(direita):
                 chutou = True
                 if num == 1:
-                    pontos_azul += 1
+                    
                     if goleiro_vermelho.x > 388 - (gol.width / 2) + 20:
                         goleiro_vermelho.move_x(-0.70)
-                if bola.x < 458:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x += 250 * janela.delta_time()
+                    if bola.x < 458:    
+                        bola.y -= 400 * janela.delta_time()
+                        bola.x += 250 * janela.delta_time()
                     
                 
                
@@ -152,7 +159,7 @@ def chute():
                     defesa = True
                 
                 if num == 2:
-                    pontos_azul += 1
+                    
                     if bola.x < 458:    
                         bola.y -= 400 * janela.delta_time()
                         bola.x += 250 * janela.delta_time()
