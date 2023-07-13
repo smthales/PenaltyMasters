@@ -9,6 +9,9 @@ from time import sleep
 
 
 
+    
+
+
 def chute():
     
 
@@ -17,8 +20,10 @@ def chute():
     user_mouse = Mouse()
     
     fundo = GameImage("./assets/area_penalti.png")
-    jogador_costas = Sprite("./assets/jogador_costas.png")
-    jogador_costas.set_position(358, 253)
+    jogador_azul = Sprite("./assets/jogador_costas.png")
+    jogador_azul.set_position(358, 253)
+    jogador_vermelho = Sprite("./assets/jogador_vermelho.png")
+    jogador_vermelho.set_position(358, 253)
     bola = Sprite("./assets/Ball_2x2_Sheet_2.png")
     bola.set_position(396, 235)
     gol = Sprite("./assets/gol.png")
@@ -26,8 +31,10 @@ def chute():
     
     cursor = Sprite("./assets/Cursor.png")
     cursor.set_position(392, 230)
-    goleiro = Sprite("./assets/goleiro.png")
-    goleiro.set_position(388, 142)
+    goleiro_vermelho = Sprite("./assets/goleiro.png")
+    goleiro_vermelho.set_position(388, 142)
+    goleiro_azul = Sprite("./assets/goleiro_azul.png")
+    goleiro_azul.set_position(388, 142)
     torcida_1 = Sprite("./assets/torcida_200_3x3.png")
     torcida_1.set_position(18, 165)
     torcida_2 = Sprite("./assets/torcida_200_3x3.png")
@@ -54,6 +61,11 @@ def chute():
     defesa = False
     chutou = False
     num = randint(1, 3)
+    vez_vermelho = False
+    vez_azul = True
+    troca = False
+    pontos_vermelho = 0
+    pontos_azul = 0
     
     while True:
         
@@ -61,88 +73,103 @@ def chute():
         if teclado.key_pressed("ESCAPE"):
             return 0
         
-        if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(esquerda):
-            chutou = True
-            if num == 1:
-                if goleiro.x > 388 - (gol.width / 2) + 20:
-                    goleiro.move_x(-0.70)
-                if bola.x > 265:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x -= 250 * janela.delta_time()
-                defesa = True
-            
-                
-                    
-            if num == 3:
-                if goleiro.x < 388 + (gol.width / 2) - 20:
-                    goleiro.move_x(0.70)
-                if bola.x > 265:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x -= 250 * janela.delta_time()
-                
-            if num == 2:
-                if bola.x > 265:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x -= 250 * janela.delta_time()
-                
-            
-        
-        if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(centro):
-            chutou = True
-            if num == 1:
-                if goleiro.x > 388 - (gol.width / 2) + 20:
-                    goleiro.move_x(-0.70)
-                bola.y -= 400 * janela.delta_time()
-                
-                
-                
-            if num == 3:
-                if goleiro.x < 388 + (gol.width / 2) - 20:
-                    goleiro.move_x(0.70)
-                bola.y -= 400 * janela.delta_time()
-                
-                
-            if num == 2:
-                bola.y -= 400 * janela.delta_time()
-                defesa = True
-                
-
-            
-            
-        
-        if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(direita):
-            chutou = True
-            if num == 1:
-                if goleiro.x > 388 - (gol.width / 2) + 20:
-                    goleiro.move_x(-0.70)
-                if bola.x < 458:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x += 250 * janela.delta_time()
-               
-            if num == 3:
-                if goleiro.x < 388 + (gol.width / 2) - 20:
-                    goleiro.move_x(0.70)
-                if bola.x < 458:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x += 250 * janela.delta_time()
-                defesa = True
-                
-            if num == 2:
-                if bola.x < 458:    
-                    bola.y -= 400 * janela.delta_time()
-                    bola.x += 250 * janela.delta_time()
-                
-        
-        
-        
-        
-        
         fundo.draw()
-        jogador_costas.draw()
         gol.draw()
         cursor.draw()
         bola.draw()
-        goleiro.draw()
+
+
+        if vez_azul == True:
+            
+            jogador_azul.draw()
+            goleiro_vermelho.draw()
+            
+
+            if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(esquerda):
+                chutou = True
+                if num == 1:
+                    if goleiro_vermelho.x > 388 - (gol.width / 2) + 20:
+                        goleiro_vermelho.move_x(-0.70)
+                    if bola.x > 265:    
+                        bola.y -= 400 * janela.delta_time()
+                        bola.x -= 250 * janela.delta_time()
+                    defesa = True
+                        
+                if num == 3:
+                    pontos_azul += 1
+                    if goleiro_vermelho.x < 388 + (gol.width / 2) - 20:
+                        goleiro_vermelho.move_x(0.70)
+                    if bola.x > 265:    
+                        bola.y -= 400 * janela.delta_time()
+                        bola.x -= 250 * janela.delta_time()
+                    
+                    
+                if num == 2:
+                    pontos_azul += 1
+                    if bola.x > 265:    
+                        bola.y -= 400 * janela.delta_time()
+                        bola.x -= 250 * janela.delta_time()
+                    
+                    
+            if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(centro):
+                chutou = True
+                if num == 1:
+                    pontos_azul += 1
+                    if goleiro_vermelho.x > 388 - (gol.width / 2) + 20:
+                        goleiro_vermelho.move_x(-0.70)
+                    bola.y -= 400 * janela.delta_time()
+                    
+                    
+                if num == 3:
+                    pontos_azul += 1
+                    if goleiro_vermelho.x < 388 + (gol.width / 2) - 20:
+                        goleiro_vermelho.move_x(0.70)
+                    bola.y -= 400 * janela.delta_time()
+                    
+                    
+                if num == 2:
+                    bola.y -= 400 * janela.delta_time()
+                    defesa = True
+                    
+            if user_mouse.is_button_pressed(1) and user_mouse.is_over_object(direita):
+                chutou = True
+                if num == 1:
+                    pontos_azul += 1
+                    if goleiro_vermelho.x > 388 - (gol.width / 2) + 20:
+                        goleiro_vermelho.move_x(-0.70)
+                if bola.x < 458:    
+                    bola.y -= 400 * janela.delta_time()
+                    bola.x += 250 * janela.delta_time()
+                    
+                
+               
+                if num == 3:
+                    if goleiro_vermelho.x < 388 + (gol.width / 2) - 20:
+                        goleiro_vermelho.move_x(0.70)
+                    if bola.x < 458:    
+                        bola.y -= 400 * janela.delta_time()
+                        bola.x += 250 * janela.delta_time()
+                    defesa = True
+                
+                if num == 2:
+                    pontos_azul += 1
+                    if bola.x < 458:    
+                        bola.y -= 400 * janela.delta_time()
+                        bola.x += 250 * janela.delta_time()
+            
+            
+        
+        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+
         torcida_1.draw()
         torcida_2.draw()
         torcida_3.draw()
@@ -159,4 +186,5 @@ def chute():
             aviso = Sprite("./assets/aviso_gol.png")
             aviso.set_position(gol.x - 275, janela.height / 2 - 300)
             aviso.draw()
+        janela.draw_text(f"AZUL: {pontos_azul}", janela.width / 2 - 150, janela.height / 2, size=20, color=(255, 255, 255), font_name="Arial", bold=True, italic=False)
         janela.update()
