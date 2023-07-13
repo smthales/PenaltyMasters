@@ -3,6 +3,7 @@ from PPlay.mouse import *
 from PPlay.sprite import *
 from PPlay.window import *
 from jogo import iniciar_jogo
+from PPlay.sound import *
 
 
 def menu():
@@ -14,7 +15,11 @@ def menu():
     botao_jogar = Sprite("./assets/botao_jogar.png")
     botao_jogar.set_position(216, 229)
 
+    som = Sound("world_anthem_spirits_40sec_master.ogg")
+
+
     while True:
+        som.play()
         fundo.draw()
         botao_jogar.draw()
         janela.update()
