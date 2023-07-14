@@ -107,7 +107,7 @@ def chute(isBlue):
                 if num == 1:
                     if goleiro.x > 388 - (gol.width / 2) + 20:
                         goleiro.move_x(-0.70)
-                    if bola.x > 265 and bola.y > 150:    
+                    if bola.x > 265 and bola.y > 170:
                         bola.y -= 400 * janela.delta_time()
                         bola.x -= 250 * janela.delta_time()
                     defesa = True
@@ -133,19 +133,22 @@ def chute(isBlue):
                     
                     if goleiro.x > 388 - (gol.width / 2) + 20:
                         goleiro.move_x(-0.70)
-                    bola.y -= 400 * janela.delta_time()
+                    if bola.y > 150:
+                        bola.y -= 400 * janela.delta_time()
                     
                     
                 if num == 3:
                     
                     if goleiro.x < 388 + (gol.width / 2) - 20:
                         goleiro.move_x(0.70)
-                    bola.y -= 400 * janela.delta_time()
+                    if bola.y > 150:
+                        bola.y -= 400 * janela.delta_time()
                     
                     
                 if num == 2:
-                    bola.y -= 400 * janela.delta_time()
-                    defesa = True
+                    if bola.y > 170:
+                        bola.y -= 400 * janela.delta_time()
+                        defesa = True
                 
             if user_mouse.is_over_object(direita):
                 chutou = True
@@ -153,20 +156,20 @@ def chute(isBlue):
                     
                     if goleiro.x > 388 - (gol.width / 2) + 20:
                         goleiro.move_x(-0.70)
-                    if bola.x < 458:    
+                    if bola.x < 458 and bola.y > 150:
                         bola.y -= 400 * janela.delta_time()
                         bola.x += 250 * janela.delta_time()
                     
                 if num == 3:
                     if goleiro.x < 388 + (gol.width / 2) - 20:
                         goleiro.move_x(0.70)
-                    if bola.x < 458:    
+                    if bola.x < 458 and bola.y > 170:
                         bola.y -= 400 * janela.delta_time()
                         bola.x += 250 * janela.delta_time()
                     defesa = True
                 
                 if num == 2:
-                    if bola.x < 458:    
+                    if bola.x < 458 and bola.y > 150:
                         bola.y -= 400 * janela.delta_time()
                         bola.x += 250 * janela.delta_time()
 
@@ -196,8 +199,8 @@ def chute(isBlue):
             aviso = Sprite("./assets/aviso_gol.png")
             aviso.set_position(gol.x - 275, janela.height / 2 - 300)
             aviso.draw()
-        janela.draw_text(f"AZUL: {scoreList[0]}", janela.width / 2 - 300, janela.height / 2 - 50, size=15, color=(255, 255, 255), font_name="Arial", bold=True, italic=False)
-        janela.draw_text(f"VERMELHO: {scoreList[1]}", janela.width / 2 + 150, janela.height / 2 - 50, size=15, color=(255, 255, 255), font_name="Arial", bold=True, italic=False)
+        janela.draw_text(f"AZUL: {scoreList[0]}", janela.width / 2 - 230, janela.height / 2 - 40, size=15, color=(255, 255, 255), font_name="Arial", bold=True, italic=False)
+        janela.draw_text(f"VERMELHO: {scoreList[1]}", janela.width / 2 + 140, janela.height / 2 - 40, size=15, color=(255, 255, 255), font_name="Arial", bold=True, italic=False)
         jogador.draw()
         goleiro.draw()
         janela.update()
